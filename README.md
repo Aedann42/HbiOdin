@@ -16,21 +16,24 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+HBI ODIN
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Criar um markdown
 
-## Learn More
+Como o projeto possui 3 paginas pensei em algo com 3 nomes. Dada a associação a inteligência sabedoria pensei no Odin e seus corvos
+Os corvos de Odin na mitologia nórdica são Huginn (pensamento) e Muninn (memória)
 
-To learn more about Next.js, take a look at the following resources:
+Página de Login - que controla o aceso - o deus - Odin
+Pagina de  principal - com o histórico - a memória - Munin
+Página de listagem de dados - que compara - o pensamento - Hugin
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Utilizando MUI importei um template https://mui.com/material-ui/getting-started/templates/sign-in/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Diferenciais
+Estilização: Utilizar MUI
+Separe a aplicação em componentes reutilizáveis
+Mensagem de erro caso o CNPJ digitado seja inválido (resposta da API);
+Utilize a biblioteca Axios para chamar a API;
+Utilize alguma biblioteca no formulário de nova transação ou login: Hook Form ou Formik; ou validação com Yup ou Zod.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Temas (mínimo escuro e claro - adicionar VIKING?)
