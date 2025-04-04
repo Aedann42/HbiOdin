@@ -6,7 +6,7 @@ export default function huginPage() {
   const router = useRouter();
 
   const handleGoToMunin = () => {
-    router.push("/munin"); // Redireciona para /munin
+    router.push("/munin"); // Redireciona para /munin adwdawd
   };
 
   return (
