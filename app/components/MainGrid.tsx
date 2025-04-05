@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CustomizedDataGrid from './CustomizedDataGrid';
-import Copyright from '../internals/components/Copyright';
+import Copyright from '../munin/internals/components/Copyright';
 
 export default function MainGrid() {
   return (
