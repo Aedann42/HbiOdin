@@ -22,6 +22,9 @@ import { TreeItem2Icon } from '@mui/x-tree-view/TreeItem2Icon';
 import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
 import { TreeViewBaseItem } from '@mui/x-tree-view/models';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+
+
 
 type Color = 'blue' | 'green';
 
@@ -71,6 +74,8 @@ const ITEMS: TreeViewBaseItem<ExtendedTreeItemProps>[] = [
   },
   { id: '4', label: 'Contact', color: 'blue' },
   { id: '5', label: 'Help', color: 'blue' },
+  { id: '6', label: 'Munin', color: 'blue' },
+  { id: '7', label: 'Hugin', color: 'blue' },
 ];
 
 function DotIcon({ color }: { color: string }) {
@@ -178,6 +183,29 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(
 });
 
 export default function CustomizedTreeView() {
+  const navigate = useNavigate();
+
+  const handleItemSelect = (
+    event: React.SyntheticEvent,
+    selectedIds: string[]
+  ) => {
+    const selectedId = selectedIds[0];
+
+    const label = (() => {
+      for (const item of ITEMS) {
+        if (item.id === selectedId) return item.label;
+        if (item.children) {
+          const child = item.children.find((c) => c.id === selectedId);
+          if (child) return child.label;
+        }
+      }
+      return '';
+    })();
+
+    if (label === 'Munin') navigate('/munin');
+    if (label === 'Hugin') navigate('/hugin');
+  };
+
   return (
     <Card
       variant="outlined"
@@ -193,6 +221,7 @@ export default function CustomizedTreeView() {
           multiSelect
           defaultExpandedItems={['1', '1.1']}
           defaultSelectedItems={['1.1', '1.1.1']}
+          onSelectedItemsChange={handleItemSelect}
           sx={{
             m: '0 -8px',
             pb: '8px',
