@@ -28,7 +28,8 @@ const xThemeComponents = {
 };
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
-  const { saldo, adicionarSaldo, gerarTransacaoAleatoria } = useSaldo(); // ✅ Hook
+  const { saldo, adicionarSaldo, gerarTransacaoAleatoria, transacoes } = useSaldo();
+ // ✅ Hook
 
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
@@ -68,7 +69,7 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
               </Button>
             </Box>
 
-            <MainGrid />
+            <MainGrid transacoes={transacoes} />
           </Stack>
         </Box>
       </Box>
