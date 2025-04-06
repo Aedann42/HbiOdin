@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Transacao = {
   data: string;
@@ -17,8 +17,26 @@ type SaldoContextType = {
 const SaldoContext = createContext<SaldoContextType | undefined>(undefined);
 
 export const SaldoProvider = ({ children }: { children: React.ReactNode }) => {
-  const [saldo, setSaldo] = useState(0);
-  const [transacoes, setTransacoes] = useState<Transacao[]>([]);
+  // 🔁 Carrega do localStorage ao iniciar
+  const [saldo, setSaldo] = useState<number>(() => {
+    const saved = localStorage.getItem('saldo');
+    return saved ? parseFloat(saved) : 0;
+  });
+
+  const [transacoes, setTransacoes] = useState<Transacao[]>(() => {
+    const saved = localStorage.getItem('transacoes');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // 💾 Salva no localStorage sempre que saldo muda
+  useEffect(() => {
+    localStorage.setItem('saldo', saldo.toString());
+  }, [saldo]);
+
+  // 💾 Salva no localStorage sempre que transações mudam
+  useEffect(() => {
+    localStorage.setItem('transacoes', JSON.stringify(transacoes));
+  }, [transacoes]);
 
   const adicionarSaldo = (valor: number) => {
     setSaldo((prev) => prev + valor);
@@ -36,11 +54,11 @@ export const SaldoProvider = ({ children }: { children: React.ReactNode }) => {
     };
     setTransacoes((prev) => [...prev, novaTransacao]);
   };
-  
+
   const gerarTransacaoAleatoria = () => {
     const valorAleatorio = Math.floor(Math.random() * 1000);
     setSaldo((prev) => prev + valorAleatorio);
-  
+
     const novaTransacao: Transacao = {
       data: new Date().toLocaleString('pt-BR', {
         day: '2-digit',
@@ -53,7 +71,7 @@ export const SaldoProvider = ({ children }: { children: React.ReactNode }) => {
       descricao: 'Transação aleatória',
       valor: valorAleatorio,
     };
-  
+
     setTransacoes((prev) => [...prev, novaTransacao]);
   };
 

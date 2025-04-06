@@ -13,6 +13,7 @@ type Transacao = {
 
 type Props = {
   transacoes: Transacao[];
+  dados: any[]; // Adicione o tipo correto para os dados, se necessário
 };
 
 export default function MuninGrid({ transacoes }: Props) {

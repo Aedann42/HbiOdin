@@ -71,7 +71,6 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const router = useRouter();
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -80,21 +79,38 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (cpfError || passwordError) {
-      event.preventDefault();
-      return;
-    }
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    if (data.get('cpf') === '12570967610' && data.get('password') === '000000') {
+  const [cpf, setCpf] = React.useState('');
+  const [rememberMe, setRememberMe] = React.useState(false);
 
-      // Redireciona para /hugin após login bem-sucedido
+  React.useEffect(() => {
+    const remembered = localStorage.getItem('rememberLogin') === 'true';
+    const savedCPF = localStorage.getItem('rememberedCPF') || '';
+  
+    if (remembered) {
+      setRememberMe(true);
+      setCpf(savedCPF);
+    }
+  }, []);
+  
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // sempre previne o submit padrão
+    if (!validateInputs()) {
+      return; 
+    }
+    const data = new FormData(event.currentTarget);
+    if (data.get('cpf') === '12570967610' && data.get('password') === 'Odincaolho42!') {
+      if (rememberMe) {
+        localStorage.setItem('rememberedCPF', data.get('cpf') as string);
+        localStorage.setItem('rememberLogin', 'true');
+      } else {
+        localStorage.removeItem('rememberedCPF');
+        localStorage.removeItem('rememberLogin');
+      }
       router.push('/hugin');
     } else {
-      alert('Credenciais inválidas!');
+      alert('Falhou com Odin! Verifique a palavra-passe.');
     }
-
+  
     console.log({
       cpf: data.get('cpf'),
       password: data.get('password'),
@@ -109,25 +125,27 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
     if (!cpf.value || !validarDocumento(cpf.value)) {
       setcpfError(true);
-      setcpfErrorMessage('Please enter a valid cpf.');
+      setcpfErrorMessage('Confira o seu CPF por favor');
       isValid = false;
     } else {
       setcpfError(false);
       setcpfErrorMessage('');
     }
 
-    if (!password.value || password.value.length < 6) {
+    const senhaForteRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+    if (!password.value || !senhaForteRegex.test(password.value)) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage(
+        'A senha deve ter ao menos 8 caracteres, com letra maiúscula, minúscula, número e caractere especial.'
+      );
       isValid = false;
     } else {
       setPasswordError(false);
       setPasswordErrorMessage('');
     }
-
     return isValid;
   };
-
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
@@ -156,19 +174,21 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             <FormControl>
               <FormLabel htmlFor="cpf">cpf</FormLabel>
               <TextField
-                error={cpfError}
-                helperText={cpfErrorMessage}
-                id="cpf"
-                type="cpf"
-                name="cpf"
-                placeholder="your cpf"
-                autoComplete="cpf"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                color={cpfError ? 'error' : 'primary'}
+             error={cpfError}
+              helperText={cpfErrorMessage}
+              id="cpf"
+             type="text"
+             name="cpf"
+             placeholder="Seu CPF"
+              autoComplete="cpf"
+              required
+              fullWidth
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              variant="outlined"
+              color={cpfError ? 'error' : 'primary'}
               />
+
             </FormControl>
             <FormControl>
               <FormLabel htmlFor="password">Password</FormLabel>
@@ -188,18 +208,23 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+              control={
+              <Checkbox
+                color="primary"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+            }
+            label="Lembre-se de mim"
+          />
             <ForgotPassword open={open} handleClose={handleClose} />
             <Button
               type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
+             fullWidth
+             variant="contained"
             >
-              Sign in
-            </Button>
+            Sign in
+</Button>
             <Link
               component="button"
               type="button"
@@ -207,7 +232,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
               variant="body2"
               sx={{ alignSelf: 'center' }}
             >
-              Forgot your password?
+              Esqueceu a senha, foi?
             </Link>
           </Box>
  

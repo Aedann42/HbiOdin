@@ -17,7 +17,7 @@ import {
   treeViewCustomizations,
 } from '../theme/customizations';
 import { dataGridhuginCustomizations } from '../theme/customizations/dataGridhugin';
-
+import axios from 'axios'; // ✨ Magia do Harry Potter (boa descrição 😂)
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -26,34 +26,51 @@ const xThemeComponents = {
 };
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
+  const [dados, setDados] = React.useState([]); // ✅ Aqui dentro do componente!
+
+  React.useEffect(() => {
+    const buscarDados = async () => {
+      try {
+        const response = await axios.post('/api/hugin', {
+          pergunta: 'qualquer pergunta de exemplo',
+        });
+        console.log('📡 Dados recebidos da API Hugin:', response.data);
+        setDados(response.data);
+      } catch (error) {
+        console.error('Erro ao chamar a API Hugin:', error);
+      }
+    };
+
+    buscarDados();
+  }, []);
+
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
         <SideMenu />
         <AppNavbar />
-        {/* Main content */}
         <Box
           component="main"
           sx={(theme) => ({
-        flexGrow: 1,
-        backgroundColor: theme.cssVariables
-          ? `rgba(${theme.cssVariables.palette.background.defaultChannel} / 1)`
-          : alpha(theme.palette.background.default, 1),
-        overflow: 'auto',
+            flexGrow: 1,
+            backgroundColor: theme.cssVariables
+              ? `rgba(${theme.cssVariables.palette.background.defaultChannel} / 1)`
+              : alpha(theme.palette.background.default, 1),
+            overflow: 'auto',
           })}
         >
           <Stack
-        spacing={2}
-        sx={{
-          alignItems: 'center',
-          mx: 3,
-          pb: 5,
-          mt: { xs: 8, md: 0 },
-        }}
+            spacing={2}
+            sx={{
+              alignItems: 'center',
+              mx: 3,
+              pb: 5,
+              mt: { xs: 8, md: 0 },
+            }}
           >
-        <Header />
-        <MainGrid />
+            <Header />
+            <MainGrid />
           </Stack>
         </Box>
       </Box>
