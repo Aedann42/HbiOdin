@@ -22,6 +22,10 @@ const CustomizedDataGrid = () => {
   const [loading, setLoading] = React.useState(false);
 
   // ✅ FUNÇÃO PARA BUSCAR DADOS DA API
+//Se der erro é necessário solicitar o acesso temporário ao cors-demo 
+//https://cors-anywhere.herokuapp.com/corsdemo CNPJ exemplo: 04849745000180
+
+
   const fetchCnpjData = async () => {
     setLoading(true);
     try {
