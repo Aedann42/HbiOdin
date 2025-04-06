@@ -9,7 +9,8 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppNavbar from '../components/AppNavbar';
 import Header from '../components/Header';
-import MainGrid from '../components/MainGrid';
+import MuninGrid from './internals/components/muninGrid';
+ // ✅ Importando o componente MuninGrid que é personalizado
 import SideMenu from '../components/SideMenu';
 import AppTheme from '../shared-theme/AppTheme';
 import {
@@ -69,7 +70,7 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
               </Button>
             </Box>
 
-            <MainGrid transacoes={transacoes} />
+            <MuninGrid transacoes={transacoes} />
           </Stack>
         </Box>
       </Box>

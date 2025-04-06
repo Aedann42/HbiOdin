@@ -1,8 +1,14 @@
+'use client';
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { columns, rows } from '../data/gridData';
+import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 
-export default function CustomizedDataGrid() {
+type Props = {
+  rows: GridRowsProp;
+  columns: GridColDef[];
+};
+
+export default function CustomizedMuninGrid({ rows, columns }: Props) {
+
   return (
     <DataGrid
       checkboxSelection

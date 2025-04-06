@@ -23,15 +23,25 @@ export default function MuninGrid({ transacoes }: Props) {
       field: 'valor',
       headerName: 'Valor (R$)',
       flex: 1,
-      valueFormatter: (params: any) => `R$ ${params.value.toFixed(2)}`,
-    },
+      renderCell: (params: any) => {
+        const valor = Number(params.value);
+        return `R$ ${valor.toFixed(2)}`;
+      }
+    }
   ];
 
   const rows = transacoes.map((t, index) => ({
     id: index,
-    ...t,
+    data: t.data,
+    descricao: t.descricao,
+    valor: t.valor,
   }));
 
+  console.log("Transações recebidas:", transacoes);
+  transacoes.forEach(t => {
+    console.log(`Tipo de valor: ${t.valor}, tipo: ${typeof t.valor}`);
+  });
+  
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' }, mx: 'auto' }}>
       <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
@@ -46,7 +56,7 @@ export default function MuninGrid({ transacoes }: Props) {
         }}
       >
         <Box>
-          <CustomizedMuninGrid />
+          <CustomizedMuninGrid rows={rows} columns={columns} />
         </Box>
         <Box>{/* Barra lateral sem conteúdo */}</Box>
       </Box>
