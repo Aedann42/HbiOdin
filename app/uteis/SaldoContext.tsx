@@ -23,23 +23,37 @@ export const SaldoProvider = ({ children }: { children: React.ReactNode }) => {
   const adicionarSaldo = (valor: number) => {
     setSaldo((prev) => prev + valor);
     const novaTransacao: Transacao = {
-      data: new Date().toLocaleDateString(),
+      data: new Date().toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
       descricao: 'Adição manual de saldo',
       valor,
     };
     setTransacoes((prev) => [...prev, novaTransacao]);
   };
-
+  
   const gerarTransacaoAleatoria = () => {
     const valorAleatorio = Math.floor(Math.random() * 1000);
     setSaldo((prev) => prev + valorAleatorio);
-
+  
     const novaTransacao: Transacao = {
-      data: new Date().toLocaleDateString(),
+      data: new Date().toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      }),
       descricao: 'Transação aleatória',
       valor: valorAleatorio,
     };
-
+  
     setTransacoes((prev) => [...prev, novaTransacao]);
   };
 
