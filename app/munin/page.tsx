@@ -18,6 +18,9 @@ import {
   treeViewCustomizations,
 } from '../theme/customizations';
 
+import { useSaldo } from '../uteis/SaldoContext'; 
+import { Button } from '@mui/material'; 
+
 const xThemeComponents = {
   ...chartsCustomizations,
   ...dataGridCustomizations,
@@ -25,34 +28,47 @@ const xThemeComponents = {
 };
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
+  const { saldo, adicionarSaldo, gerarTransacaoAleatoria } = useSaldo(); // ✅ Hook
+
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
         <SideMenu />
         <AppNavbar />
-        {/* Main content */}
         <Box
           component="main"
           sx={(theme) => ({
-        flexGrow: 1,
-        backgroundColor: theme.cssVariables
-          ? `rgba(${theme.cssVariables.palette.background.defaultChannel} / 1)`
-          : alpha(theme.palette.background.default, 1),
-        overflow: 'auto',
+            flexGrow: 1,
+            backgroundColor: theme.cssVariables
+              ? `rgba(${theme.cssVariables.palette.background.defaultChannel} / 1)`
+              : alpha(theme.palette.background.default, 1),
+            overflow: 'auto',
           })}
         >
           <Stack
-        spacing={2}
-        sx={{
-          alignItems: 'center',
-          mx: 3,
-          pb: 5,
-          mt: { xs: 8, md: 0 },
-        }}
+            spacing={2}
+            sx={{
+              alignItems: 'center',
+              mx: 3,
+              pb: 5,
+              mt: { xs: 8, md: 0 },
+            }}
           >
-        <Header />
-        <MainGrid />
+            <Header />
+
+            {/* ✅ Painel de Saldo */}
+            <Box sx={{ textAlign: 'center' }}>
+              <h2>Saldo: R$ {saldo.toFixed(2)}</h2>
+              <Button variant="contained" onClick={() => adicionarSaldo(100)} sx={{ mr: 2 }}>
+                Adicionar R$100
+              </Button>
+              <Button variant="outlined" onClick={gerarTransacaoAleatoria}>
+                Transação Aleatória
+              </Button>
+            </Box>
+
+            <MainGrid />
           </Stack>
         </Box>
       </Box>
