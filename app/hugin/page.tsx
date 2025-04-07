@@ -17,7 +17,8 @@ import {
   treeViewCustomizations,
 } from '../theme/customizations';
 import { dataGridhuginCustomizations } from '../theme/customizations/dataGridhugin';
-import axios from 'axios'; // ✨ Magia do Harry Potter (boa descrição 😂)
+import axios from 'axios'; // ✨ Magia do Harry Potter 
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -25,8 +26,9 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 
+
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
-  const [dados, setDados] = React.useState([]); // ✅ Aqui dentro do componente!
+  const [dados, setDados] = React.useState([]); 
 
   React.useEffect(() => {
     const buscarDados = async () => {
@@ -54,8 +56,8 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
           component="main"
           sx={(theme) => ({
             flexGrow: 1,
-            backgroundColor: theme.cssVariables
-              ? `rgba(${theme.cssVariables.palette.background.defaultChannel} / 1)`
+            backgroundColor: theme.vars
+              ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
               : alpha(theme.palette.background.default, 1),
             overflow: 'auto',
           })}

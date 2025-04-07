@@ -41,7 +41,6 @@ const CustomizedDataGrid = () => {
       const endereco = `${data.logradouro}, ${data.numero} - ${data.bairro}, ${data.municipio}/${data.uf}`;
       const contato = `${data.telefone ?? ''} ${data.email ?? ''}`.trim();
 
-      // ✅ TRANSFORMA QSA EM LINHAS
       const socios = data.qsa.map((pessoa: any, index: number) => ({
         id: `${cleanedCnpj}-${index}`,
         cnpj: data.cnpj,

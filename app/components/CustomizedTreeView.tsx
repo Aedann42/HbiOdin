@@ -110,8 +110,8 @@ interface CustomLabelProps {
 function CustomLabel({ color, expandable, children, ...other }: CustomLabelProps) {
   const theme = useTheme();
   const colors = {
-    blue: (theme.cssVariables || theme).palette.primary.main,
-    green: (theme.cssVariables || theme).palette.success.main,
+    blue: (theme.vars || theme).palette.primary.main,
+    green: (theme.vars || theme).palette.success.main,
   };
 
   const iconColor = color ? colors[color] : null;

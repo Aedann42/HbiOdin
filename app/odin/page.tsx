@@ -1,26 +1,25 @@
 "use client";
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import MuiCard from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
 import CssBaseline from '@mui/material/CssBaseline';
+import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
 import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import MuiCard from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
+import { useRouter } from "next/navigation";
+import * as React from 'react';
+import { OdinOlhoIcon } from '../components/CustomIcons';
 import ForgotPassword from '../components/ForgotPassword';
 import AppTheme from '../shared-theme/AppTheme';
 import ColorModeSelect from '../shared-theme/ColorModeSelect';
-import { OdinOlhoIcon } from '../components/CustomIcons';
 import { validarDocumento } from '../uteis/Validador';
-import { Router } from 'next/router';
-import { useRouter } from "next/navigation";
-
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -106,7 +105,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         localStorage.removeItem('rememberedCPF');
         localStorage.removeItem('rememberLogin');
       }
-      router.push('/hugin');
+      router.push('/munin');
     } else {
       alert('Falhou com Odin! Verifique a palavra-passe.');
     }

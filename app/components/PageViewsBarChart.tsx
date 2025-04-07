@@ -6,13 +6,14 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { useTheme } from '@mui/material/styles';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 export default function PageViewsBarChart() {
   const theme = useTheme();
   const colorPalette = [
-    (theme.cssVariables || theme).palette.primary.dark,
-    (theme.cssVariables || theme).palette.primary.main,
-    (theme.cssVariables || theme).palette.primary.light,
+    (theme.vars || theme).palette.primary.dark,
+    (theme.vars || theme).palette.primary.main,
+    (theme.vars || theme).palette.primary.light,
   ];
   return (
     <Card variant="outlined" sx={{ width: '100%' }}>

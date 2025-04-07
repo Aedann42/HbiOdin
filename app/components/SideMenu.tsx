@@ -42,7 +42,6 @@ export default function SideMenu() {
           p: 1.5,
         }}
       >
-        <SelectContent />
       </Box>
       <Divider />
       <Box
@@ -77,10 +76,9 @@ export default function SideMenu() {
             HBI MASTER
           </Typography>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            omelhorfuncionariodaempresa@hbi.com.br
+            yuri@hbi.com.br
           </Typography>
         </Box>
-        <OptionsMenu />
       </Stack>
     </Drawer>
   );

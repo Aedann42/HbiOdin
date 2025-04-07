@@ -1,16 +1,15 @@
 'use client';
-import * as React from 'react';
-import type {} from '@mui/x-date-pickers/themeAugmentation';
-import type {} from '@mui/x-charts/themeAugmentation';
-import type {} from '@mui/x-tree-view/themeAugmentation';
-import { alpha } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
 import Stack from '@mui/material/Stack';
+import { alpha } from '@mui/material/styles';
+import type { } from '@mui/material/themeCssVarsAugmentation';
+import type { } from '@mui/x-charts/themeAugmentation';
+import type { } from '@mui/x-date-pickers/themeAugmentation';
+import type { } from '@mui/x-tree-view/themeAugmentation';
 import AppNavbar from '../components/AppNavbar';
 import Header from '../components/Header';
-import MuninGrid from './internals/components/muninGrid';
- // ✅ Importando o componente MuninGrid que é personalizado
 import SideMenu from '../components/SideMenu';
 import AppTheme from '../shared-theme/AppTheme';
 import {
@@ -18,9 +17,10 @@ import {
   dataGridCustomizations,
   treeViewCustomizations,
 } from '../theme/customizations';
+import { useSaldo } from '../uteis/SaldoContext';
+import MuninGrid from './internals/components/muninGrid';
 
-import { useSaldo } from '../uteis/SaldoContext'; 
-import { Button } from '@mui/material'; 
+
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -42,8 +42,8 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
           component="main"
           sx={(theme) => ({
             flexGrow: 1,
-            backgroundColor: theme.cssVariables
-              ? `rgba(${theme.cssVariables.palette.background.defaultChannel} / 1)`
+            backgroundColor: theme.vars
+              ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
               : alpha(theme.palette.background.default, 1),
             overflow: 'auto',
           })}

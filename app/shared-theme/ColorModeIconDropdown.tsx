@@ -6,6 +6,7 @@ import IconButton, { IconButtonOwnProps } from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useColorScheme } from '@mui/material/styles';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
   const { mode, systemMode, setMode } = useColorScheme();
@@ -30,9 +31,9 @@ export default function ColorModeIconDropdown(props: IconButtonOwnProps) {
           display: 'inline-flex',
           width: '2.25rem',
           height: '2.25rem',
-          borderRadius: (theme.cssVariables || theme).shape.borderRadius,
+          borderRadius: (theme.vars || theme).shape.borderRadius,
           border: '1px solid',
-          borderColor: (theme.cssVariables || theme).palette.divider,
+          borderColor: (theme.vars || theme).palette.divider,
         })}
       />
     );

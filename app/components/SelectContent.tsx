@@ -12,13 +12,14 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
 import SmartphoneRoundedIcon from '@mui/icons-material/SmartphoneRounded';
 import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
   width: 28,
   height: 28,
-  backgroundColor: (theme.cssVariables || theme).palette.background.paper,
-  color: (theme.cssVariables || theme).palette.text.secondary,
-  border: `1px solid ${(theme.cssVariables || theme).palette.divider}`,
+  backgroundColor: (theme.vars || theme).palette.background.paper,
+  color: (theme.vars || theme).palette.text.secondary,
+  border: `1px solid ${(theme.vars || theme).palette.divider}`,
 }));
 
 const ListItemAvatar = styled(MuiListItemAvatar)({
@@ -63,39 +64,7 @@ export default function SelectContent() {
             <DevicesRoundedIcon sx={{ fontSize: '1rem' }} />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Yuri Costa Manso-web" secondary="Web app" />
-      </MenuItem>
-      <MenuItem value={10}>
-        <ListItemAvatar>
-          <Avatar alt="Yuri Costa Manso App">
-            <SmartphoneRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Yuri Costa Manso-app" secondary="Mobile application" />
-      </MenuItem>
-      <MenuItem value={20}>
-        <ListItemAvatar>
-          <Avatar alt="Yuri Costa Manso Store">
-            <DevicesRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Yuri Costa Manso-Store" secondary="Web app" />
-      </MenuItem>
-      <ListSubheader>Development</ListSubheader>
-      <MenuItem value={30}>
-        <ListItemAvatar>
-          <Avatar alt="Yuri Costa Manso Store">
-            <ConstructionRoundedIcon sx={{ fontSize: '1rem' }} />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Yuri Costa Manso-Admin" secondary="Web app" />
-      </MenuItem>
-      <Divider sx={{ mx: -1 }} />
-      <MenuItem value={40}>
-        <ListItemIcon>
-          <AddRoundedIcon />
-        </ListItemIcon>
-        <ListItemText primary="Add product" secondary="Web app" />
+
       </MenuItem>
     </Select>
   );

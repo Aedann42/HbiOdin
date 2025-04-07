@@ -8,6 +8,7 @@ import CheckBoxOutlineBlankRoundedIcon from '@mui/icons-material/CheckBoxOutline
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { gray, brand } from '../themePrimitives';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 /* eslint-disable import/prefer-default-export */
 export const inputsCustomizations: Components<Theme> = {
@@ -31,7 +32,7 @@ export const inputsCustomizations: Components<Theme> = {
     styleOverrides: {
       root: ({ theme }) => ({
         boxShadow: 'none',
-        borderRadius: (theme.cssVariables || theme).shape.borderRadius,
+        borderRadius: (theme.vars || theme).shape.borderRadius,
         textTransform: 'none',
         variants: [
           {
@@ -113,7 +114,7 @@ export const inputsCustomizations: Components<Theme> = {
               variant: 'outlined',
             },
             style: {
-              color: (theme.cssVariables || theme).palette.text.primary,
+              color: (theme.vars || theme).palette.text.primary,
               border: '1px solid',
               borderColor: gray[200],
               backgroundColor: alpha(gray[50], 0.3),
@@ -225,11 +226,11 @@ export const inputsCustomizations: Components<Theme> = {
     styleOverrides: {
       root: ({ theme }) => ({
         boxShadow: 'none',
-        borderRadius: (theme.cssVariables || theme).shape.borderRadius,
+        borderRadius: (theme.vars || theme).shape.borderRadius,
         textTransform: 'none',
         fontWeight: theme.typography.fontWeightMedium,
         letterSpacing: 0,
-        color: (theme.cssVariables || theme).palette.text.primary,
+        color: (theme.vars || theme).palette.text.primary,
         border: '1px solid ',
         borderColor: gray[200],
         backgroundColor: alpha(gray[50], 0.3),
@@ -383,10 +384,10 @@ export const inputsCustomizations: Components<Theme> = {
       },
       root: ({ theme }) => ({
         padding: '8px 12px',
-        color: (theme.cssVariables || theme).palette.text.primary,
-        borderRadius: (theme.cssVariables || theme).shape.borderRadius,
-        border: `1px solid ${(theme.cssVariables || theme).palette.divider}`,
-        backgroundColor: (theme.cssVariables || theme).palette.background.default,
+        color: (theme.vars || theme).palette.text.primary,
+        borderRadius: (theme.vars || theme).shape.borderRadius,
+        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+        backgroundColor: (theme.vars || theme).palette.background.default,
         transition: 'border 120ms ease-in',
         '&:hover': {
           borderColor: gray[400],
@@ -427,9 +428,9 @@ export const inputsCustomizations: Components<Theme> = {
   MuiInputAdornment: {
     styleOverrides: {
       root: ({ theme }) => ({
-        color: (theme.cssVariables || theme).palette.grey[500],
+        color: (theme.vars || theme).palette.grey[500],
         ...theme.applyStyles('dark', {
-          color: (theme.cssVariables || theme).palette.grey[400],
+          color: (theme.vars || theme).palette.grey[400],
         }),
       }),
     },
